@@ -78,6 +78,6 @@ if __name__ == '__main__':
         check_witness()
         sys.stdout.flush()
         loopcounter += 1
-        if(loopcounter % check_rate_feeds_seed_ratio == 0 and seednode != ""):
+        if(loopcounter % check_rate_feeds_seed_ratio == 0 and seed_host != ""):
           check_seednode()
         time.sleep(check_rate)
