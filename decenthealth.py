@@ -23,8 +23,6 @@ check_rate              = int(45)               # amount of time (seconds) for t
 check_rate_feeds_seed   = int(3600)             # set this to a considerably higher amount of seconds than check_rate so this script won't check your price_feed and seed availibility as much as that.
 currentmisses           = int(0)                # current block misses (note this is set at -1 missed blocks so you will get 1 initial notification if you have more than 0 blocks missed currently. You could set this to your current count of misses to prevent the inital notification)
 startmisses             = int(-1)               # global holder of misses at start of script
-feeds_to_check          = []   # feel free to add more pricefeeds here to monitor. If you have them all in one script you could consider limiting it to 1 of those in that pricefeed script. As long as the script runs at your given (cronjob) interval and you don't get notifications, you know at least the script is still running :P
-feed_warning_treshold   = int(10)               # hours of no pricefeed updates before you get a notification
 loopcounter             = int(0)                # this is an internal reference i++ counter needed for correct functioning of the script
 tresholdwitnessflip     = int(7)                # after how many blocks the witness should switch to different signing key
 
