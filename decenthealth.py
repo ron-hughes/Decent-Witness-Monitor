@@ -5,19 +5,19 @@ import requests
 import json
 import os
 import sys
-from grapheneapi.graphenewsrpc import GrapheneWebsocketRPC
+from beemapi.graphenerpc import GrapheneRPC
 
 # witness/delegate/producer account name to check
-witness = "roelandp"
+witness = "praxeaze"
 backupsigningkey = ""
-witnessurl = "https://roelandp.nl"
+witnessurl = "https://twitter.com/praxeaze"
 
-telegram_token = "123456789:ABCDEFGH"	                            # REPLACE_THIS Create your Telegram bot at @BotFather (https://telegram.me/botfather)
-telegram_id    = "97654321"                                        # REPLACE_THIS Get your telegram id at @MyTelegramID_bot (https://telegram.me/mytelegramid_bot)
+telegram_token = "1085133021:AAHJW2GZUreNsZZcujASWNUpjhiYnUybIwg"	                            # REPLACE_THIS Create your Telegram bot at @BotFather (https://telegram.me/botfather)
+telegram_id    = "358913628"                                        # REPLACE_THIS Get your telegram id at @MyTelegramID_bot (https://telegram.me/mytelegramid_bot)
 
-websocket	          	= "wss://socket.decentgo.com:8090" #seednode to connect to! MUST BE DEFINED
+websocket	          	= "wss://blurtseed-se.privex.io:2015" #seednode to connect to! MUST BE DEFINED
 seed_host               = ""                    # hostname/ip for the public seed to monitor
-seed_port               = 9777                  # port for the public seed to monitor (decent default = 9777)
+seed_port               = 2001                  # port for the public seed to monitor (decent default = 9777)
 seed_timeout_check      = int(10)               # seconds before timeout is called on telnet public seed operation.
 check_rate              = int(45)               # amount of time (seconds) for the script to sleep before next check! Every x seconds the script will check missed blocks.
 check_rate_feeds_seed   = int(3600)             # set this to a considerably higher amount of seconds than check_rate so this script won't check your price_feed and seed availibility as much as that.
@@ -31,7 +31,7 @@ walletpwd               = ""                    #encryption key of decent local 
 check_rate_feeds_seed_ratio = round(check_rate_feeds_seed/check_rate, 0)
 
 # Setup node instance
-decent = ws = GrapheneWebsocketRPC(websocket,"","")
+decent = ws = GrapheneRPC(websocket,"","")
 
 # Telegram barebones apicall
 def telegram(method, params=None):
@@ -58,7 +58,7 @@ def check_seednode():
 # Check how many blocks a witness has missed
 def check_witness():
     global currentmisses
-    missed = ws.get_miner_by_account(ws.get_account_by_name(witness)['id'])['total_missed']
+    missed = ws.get_witness_by_account(ws.get_account_by_name(witness)['id'])['total_missed']
     print(str(loopcounter)+ ": Missed blocks = " + str(missed))
     if missed > currentmisses:
     # Could create the witness_update transaction and broadcast new signing key here to switch from main to backup
